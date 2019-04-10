@@ -5,6 +5,7 @@ import 'package:apilab/home.dart';
 import 'package:apilab/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -77,6 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
         });
       } else {
         User user = User.fromJson(jsonData['payload'][0]);
+        SharedPreferences preference = await SharedPreferences.getInstance();
+        preference.setString("user-info", jsonEncode(user.toJson()));
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomeScreen(user)));
       }

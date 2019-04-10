@@ -10,4 +10,12 @@ class User{
     return User(data['userId'], data['fullName'], data['email']);
   }
 
+  Map<String, dynamic> toJson(){
+    return {
+      'userId': userId,
+      'fullName': fullName,
+      'email': email,
+    };
+  }
+
 }
